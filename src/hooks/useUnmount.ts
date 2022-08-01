@@ -1,6 +1,6 @@
 import useMount from "./useMount";
 
-export default function useDismount(fn: () => any) {
+export default function useUnmount(fn: () => any) {
     useMount(() => () => {
         if (typeof fn === 'function') {
             fn()

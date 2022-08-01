@@ -45,15 +45,17 @@ export default function useList<T = any>(initState: T[] = []) {
         return list.length
     }, [list])
 
-    return {
+    return [
         list,
-        length,
-        set: setList,
-        push,
-        unshift,
-        pop,
-        contact,
-        shift,
-        keep
-    };
+        {
+            length,
+            set: setList,
+            push,
+            unshift,
+            pop,
+            contact,
+            shift,
+            keep
+        }
+    ]
 }
