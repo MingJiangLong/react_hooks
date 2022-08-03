@@ -1,13 +1,13 @@
 import useList from "./hooks/useList";
 import useListenerCallback from "./hooks/useListenerCallback";
-import useMergeState from "./hooks/useMergeState";
+import useKeyvalue from "./hooks/useKeyvalue";
 import useMount from "./hooks/useMount";
 import useOnce from "./hooks/useOnce";
 import useUnmount from "./hooks/useUnmount";
 export {
     useListenerCallback,
     useList,
-    useMergeState,
+    useKeyvalue,
     useOnce,
     useMount,
     useUnmount,
