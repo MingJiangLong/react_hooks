@@ -4,7 +4,7 @@
   "description": "hooks",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "jest"
+    "push": "node ./publishScript.js"
   },
   "keywords": [
     "react hook"
