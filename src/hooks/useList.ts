@@ -1,43 +1,45 @@
 import { useMemo, useState } from "react";
 
-export default function useList<T = any>(initState: T[] = []) {
-    const [list, setList] = useState(initState);
-    function push(item: T) {
-        setList((pre) => {
-            return [...pre, item];
+type ArrayItem<T> = T extends Array<infer E> ? E : any
+export default function useList<S extends Array<any>>(initState: S | (() => S)): [S, {
+    length: number;
+    set: React.Dispatch<React.SetStateAction<S>>;
+    push: (item: ArrayItem<S>) => void;
+    unshift: (item: ArrayItem<S>) => void;
+    pop: () => void;
+    contact: (items: S) => void;
+    shift: () => void;
+}] {
+
+    const [list, setList] = useState<S>(initState);
+
+    function push(item: ArrayItem<S>) {
+        setList(pre => {
+            return [...pre, item] as S;
         });
     }
 
     function pop() {
         setList((pre) => {
-            return pre.splice(-1);
+            return pre.splice(-1) as S;
         });
     }
 
-    function contact(items: T[]) {
+    function contact(items: S) {
         setList((pre) => {
-            return [...pre, ...items];
+            return [...pre, ...items] as S;
         });
     }
 
     function shift() {
         setList((pre) => {
-            return [...pre.splice(1)];
+            return [...pre.splice(1)] as S;
         });
     }
 
-    function unshift(item: T) {
+    function unshift(item: ArrayItem<S>) {
         setList((pre) => {
-            return [item, ...pre];
-        });
-    }
-
-    function keep(
-        predicate: (value: T, index: number, array: T[]) => value is T,
-        thisArg?: any
-    ) {
-        setList((pre) => {
-            return [...pre.filter(predicate, thisArg)];
+            return [item, ...pre] as S;
         });
     }
 
@@ -55,7 +57,9 @@ export default function useList<T = any>(initState: T[] = []) {
             pop,
             contact,
             shift,
-            keep
         }
     ]
 }
+
+
+const [list, { push }] = useList<{ name: string, age: number }[]>([])
