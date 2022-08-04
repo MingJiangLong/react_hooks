@@ -6,7 +6,7 @@ export default function useKeyvalue<T extends { [k: string]: any }>(initState: T
 }] {
     const [state, setState] = useState<T>(initState)
 
-    function mergeState(value: { [k in keyof T]: T[k] }) {
+    function mergeState(value: Partial<{ [k in keyof T]: T[k] }>) {
         setState(pre => ({
             ...pre,
             ...value

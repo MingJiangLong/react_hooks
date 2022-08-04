@@ -60,6 +60,3 @@ export default function useList<S extends Array<any>>(initState: S | (() => S)):
         }
     ]
 }
-
-
-const [list, { push }] = useList<{ name: string, age: number }[]>([])
