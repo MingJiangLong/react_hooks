@@ -4,6 +4,7 @@ import useKeyvalue from "./hooks/useKeyvalue";
 import useMount from "./hooks/useMount";
 import useOnce from "./hooks/useOnce";
 import useUnmount from "./hooks/useUnmount";
+import useUpdateOnce from "./hooks/useUpdateOnce";
 export {
     useListenerCallback,
     useList,
@@ -11,4 +12,5 @@ export {
     useOnce,
     useMount,
     useUnmount,
+    useUpdateOnce
 }

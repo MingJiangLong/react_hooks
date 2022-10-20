@@ -12,8 +12,8 @@ export default function useListenerCallback<T extends Array<any>>(
 
     function executor(...args: T) {
         let result = fnRef.current && fnRef.current({ loading: loadingRef.current, params: args });
+        loadingRef.current = true;
         if (result && result.then && typeof result.then === "function") {
-            loadingRef.current = true;
             return result.then(
                 (data: any) => {
                     loadingRef.current = false;
@@ -24,11 +24,17 @@ export default function useListenerCallback<T extends Array<any>>(
                     return error;
                 }
             );
+        } else {
+            loadingRef.current = true;
         }
     }
 
+    function updateStatus(value: boolean) {
+        loadingRef.current = !!value;
+    }
     return {
-        executor
+        executor,
+        updateStatus
     };
 }
 
